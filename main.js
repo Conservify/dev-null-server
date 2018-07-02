@@ -9,6 +9,10 @@ http.createServer(function(req, res) {
       accepted += data.length;
     });
 
+    req.on('error', function(err) {
+      console.log("ERROR", accepted, err);
+    });
+
     req.on('end', function() {
       res.writeHead(200, {'Content-Type': 'text/html'});
       res.end('Ok');
