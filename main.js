@@ -25,7 +25,7 @@ var server = http.createServer(function(req, res) {
         });
     }
     else {
-        console.log("Serve", req.method, req.path);
+        console.log("Serve", req.method, req.headers);
         serve(req, res, finalhandler(req, res));
     }
 });
