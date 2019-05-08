@@ -1,12 +1,21 @@
 var http = require('http');
 var finalhandler = require('finalhandler');
 var serveStatic = require('serve-static');
+var multiparty = require('multiparty');
 
 var serve = serveStatic('public', {'index': ['index.html']});
 
 var server = http.createServer(function(req, res) {
     if (req.method == 'POST') {
         console.log("POST", req.headers['content-type'], req.headers['content-length']);
+
+        var form = new multiparty.Form();
+
+        form.parse(req, function(err, fields, files) {
+            console.log("Parsed");
+            console.log(fields);
+            console.log(files);
+        });
 
         let accepted = 0;
         req.on('data', function(data) {
